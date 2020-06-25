@@ -56,6 +56,8 @@ class TextOneLine extends StatelessWidget implements Text {
   @override
   final TextHeightBehavior textHeightBehavior;
 
+  final Key richTextKey;
+
   const TextOneLine(
     this.data, {
     Key key,
@@ -68,6 +70,7 @@ class TextOneLine extends StatelessWidget implements Text {
     this.textScaleFactor,
     this.textWidthBasis = TextWidthBasis.parent,
     this.textHeightBehavior,
+    this.richTextKey,
   })  : assert(data != null),
         super(key: key);
 
@@ -84,6 +87,7 @@ class TextOneLine extends StatelessWidget implements Text {
     );
 
     return RichTextX(
+      key: richTextKey,
       textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
       textDirection: textDirection,
       // RichTextX uses Directionality.of to obtain a default if this is null.
