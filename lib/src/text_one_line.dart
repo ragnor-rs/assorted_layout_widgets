@@ -56,7 +56,7 @@ class TextOneLine extends StatelessWidget implements Text {
   @override
   final TextHeightBehavior textHeightBehavior;
 
-  final Key richTextKey;
+  final Key textKey;
 
   const TextOneLine(
     this.data, {
@@ -70,7 +70,7 @@ class TextOneLine extends StatelessWidget implements Text {
     this.textScaleFactor,
     this.textWidthBasis = TextWidthBasis.parent,
     this.textHeightBehavior,
-    this.richTextKey,
+    this.textKey,
   })  : assert(data != null),
         super(key: key);
 
@@ -86,21 +86,32 @@ class TextOneLine extends StatelessWidget implements Text {
       children: textSpan != null ? <TextSpan>[textSpan] : null,
     );
 
-    return RichTextX(
-      key: richTextKey,
-      textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
-      textDirection: textDirection,
-      // RichTextX uses Directionality.of to obtain a default if this is null.
-      locale: locale,
-      // RichTextX uses Localizations.localeOf to obtain a default if this is null
-      softWrap: softWrap ?? defaultTextStyle.softWrap,
-      overflow: overflow ?? defaultTextStyle.overflow,
-      textScaleFactor: textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
-      maxLines: maxLines ?? defaultTextStyle.maxLines,
-      text: _textSpan,
-      strutStyle: strutStyle,
-      textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
-      textHeightBehavior: textHeightBehavior ?? defaultTextStyle.textHeightBehavior,
+    return Stack(
+      children: <Widget>[
+        Opacity(
+          opacity: 0.0,
+          child: Text(
+            _textSpan.text,
+            key: textKey,
+          ),
+        ),
+        RichTextX(
+          key: textKey,
+          textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
+          textDirection: textDirection,
+          // RichTextX uses Directionality.of to obtain a default if this is null.
+          locale: locale,
+          // RichTextX uses Localizations.localeOf to obtain a default if this is null
+          softWrap: softWrap ?? defaultTextStyle.softWrap,
+          overflow: overflow ?? defaultTextStyle.overflow,
+          textScaleFactor: textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
+          maxLines: maxLines ?? defaultTextStyle.maxLines,
+          text: _textSpan,
+          strutStyle: strutStyle,
+          textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
+          textHeightBehavior: textHeightBehavior ?? defaultTextStyle.textHeightBehavior,
+        ),
+      ],
     );
   }
 
