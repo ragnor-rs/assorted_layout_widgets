@@ -96,7 +96,6 @@ class TextOneLine extends StatelessWidget implements Text {
           ),
         ),
         RichTextX(
-          key: textKey,
           textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
           textDirection: textDirection,
           // RichTextX uses Directionality.of to obtain a default if this is null.
