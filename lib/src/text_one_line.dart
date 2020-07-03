@@ -93,6 +93,7 @@ class TextOneLine extends StatelessWidget implements Text {
           child: Text(
             _textSpan.text,
             key: textKey,
+            textScaleFactor: 0.0,
           ),
         ),
         RichTextX(
