@@ -86,31 +86,20 @@ class TextOneLine extends StatelessWidget implements Text {
       children: textSpan != null ? <TextSpan>[textSpan] : null,
     );
 
-    return Stack(
-      children: <Widget>[
-        Offstage(
-          child: Text(
-            _textSpan.text,
-            key: textKey,
-            textScaleFactor: 0.0,
-          ),
-        ),
-        RichTextX(
-          textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
-          textDirection: textDirection,
-          // RichTextX uses Directionality.of to obtain a default if this is null.
-          locale: locale,
-          // RichTextX uses Localizations.localeOf to obtain a default if this is null
-          softWrap: softWrap ?? defaultTextStyle.softWrap,
-          overflow: overflow ?? defaultTextStyle.overflow,
-          textScaleFactor: textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
-          maxLines: maxLines ?? defaultTextStyle.maxLines,
-          text: _textSpan,
-          strutStyle: strutStyle,
-          textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
-          textHeightBehavior: textHeightBehavior ?? defaultTextStyle.textHeightBehavior,
-        ),
-      ],
+    return RichTextX(
+      textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
+      textDirection: textDirection,
+      // RichTextX uses Directionality.of to obtain a default if this is null.
+      locale: locale,
+      // RichTextX uses Localizations.localeOf to obtain a default if this is null
+      softWrap: softWrap ?? defaultTextStyle.softWrap,
+      overflow: overflow ?? defaultTextStyle.overflow,
+      textScaleFactor: textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
+      maxLines: maxLines ?? defaultTextStyle.maxLines,
+      text: _textSpan,
+      strutStyle: strutStyle,
+      textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
+      textHeightBehavior: textHeightBehavior ?? defaultTextStyle.textHeightBehavior,
     );
   }
 
@@ -121,6 +110,7 @@ class TextOneLine extends StatelessWidget implements Text {
     if (textSpan != null) {
       properties.add(
           textSpan.toDiagnosticsNode(name: 'textSpan', style: DiagnosticsTreeStyle.transition));
+      properties.add(new StringProperty('text', textSpan.text));
     }
     style?.debugFillProperties(properties);
     properties.add(new EnumProperty<TextAlign>('textAlign', textAlign, defaultValue: null));
