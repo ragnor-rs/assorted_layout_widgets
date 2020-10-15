@@ -56,8 +56,6 @@ class TextOneLine extends StatelessWidget implements Text {
   @override
   final TextHeightBehavior textHeightBehavior;
 
-  final Key textKey;
-
   const TextOneLine(
     this.data, {
     Key key,
@@ -70,7 +68,6 @@ class TextOneLine extends StatelessWidget implements Text {
     this.textScaleFactor,
     this.textWidthBasis = TextWidthBasis.parent,
     this.textHeightBehavior,
-    this.textKey,
   })  : assert(data != null),
         super(key: key);
 
