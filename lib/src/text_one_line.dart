@@ -128,17 +128,17 @@ class TextOneLine extends StatelessWidget implements Text {
   String get semanticsLabel => null;
 
   String _getText(InlineSpan inlineSpan) {
-    var result = "";
+    final result = StringBuffer();
     if (inlineSpan is TextSpan) {
-      result += inlineSpan.text;
+      result.write(inlineSpan.text);
     }
     inlineSpan.visitChildren((span) {
       if (span is TextSpan) {
-        result += span.text;
+        result.write(span.text);
       }
       return true;
     });
-    return result;
+    return result.toString();
   }
 }
 
