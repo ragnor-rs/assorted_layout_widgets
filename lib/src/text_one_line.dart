@@ -107,7 +107,7 @@ class TextOneLine extends StatelessWidget implements Text {
     if (textSpan != null) {
       properties.add(
           textSpan.toDiagnosticsNode(name: 'textSpan', style: DiagnosticsTreeStyle.transition));
-      properties.add(new StringProperty('text', textSpan.text));
+      properties.add(new StringProperty('text', _getText(textSpan)));
     }
     style?.debugFillProperties(properties);
     properties.add(new EnumProperty<TextAlign>('textAlign', textAlign, defaultValue: null));
@@ -126,6 +126,20 @@ class TextOneLine extends StatelessWidget implements Text {
 
   @override
   String get semanticsLabel => null;
+
+  String _getText(InlineSpan inlineSpan) {
+    var result = "";
+    if (inlineSpan is TextSpan) {
+      result += inlineSpan.text;
+    }
+    inlineSpan.visitChildren((span) {
+      if (span is TextSpan) {
+        result += span.text;
+      }
+      return true;
+    });
+    return result;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
