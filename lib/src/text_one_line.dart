@@ -88,8 +88,7 @@ class TextOneLine extends StatelessWidget implements Text {
 
     return Stack(
       children: <Widget>[
-        Opacity(
-          opacity: 0.0,
+        Offstage(
           child: Text(
             _textSpan.text,
             key: textKey,
